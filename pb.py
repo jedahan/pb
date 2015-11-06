@@ -4,6 +4,7 @@ import sys
 import click
 import pickle
 from os.path import exists
+from collections import OrderedDict
 
 def load(db):
     if exists(db):
@@ -23,7 +24,7 @@ def cli():
 def lookup(name, db):
     """ lookup all phone numbers that match name """
     database = load(db)
-    matches = sorted([ key for key in database if name in key ])
+    matches = [ key for key in database if name in key ]
     if len(matches):
         for name in matches:
             print("%s (%s)" % (name, database[name]))
@@ -54,6 +55,7 @@ def add(name, phone, db):
         sys.exit(-1)
     else:
         database[name] = phone
+        database = OrderedDict(sorted(database.items()))
         pickle.dump(database, open(db, 'wb'))
         print("added '%s (%s)' to %r" % (name, phone, db))
 
