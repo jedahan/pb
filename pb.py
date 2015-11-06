@@ -23,7 +23,7 @@ def cli():
 def lookup(name, db):
     """ lookup all phone numbers that match name """
     database = load(db)
-    matches = [ key for key in database if name in key ]
+    matches = sorted([ key for key in database if name in key ])
     if len(matches):
         for name in matches:
             print("%s (%s)" % (name, database[name]))
@@ -56,6 +56,50 @@ def add(name, phone, db):
         database[name] = phone
         pickle.dump(database, open(db, 'wb'))
         print("added '%s (%s)' to %r" % (name, phone, db))
+
+@cli.command()
+@click.argument('name')
+@click.argument('phone')
+@click.argument('db')
+def change(name, phone, db):
+    """ change a person in the phonebook """
+    database = load(db)
+    if name in database:
+        database[name] = phone
+        pickle.dump(database, open(db, 'wb'))
+        print("%s number changed to %r" % (name, phone ))
+    else:
+        print("no such person %r in %r" % (name, db))
+        sys.exit(-1)
+
+@cli.command()
+@click.argument('name')
+@click.argument('phone')
+@click.argument('db')
+def remove(name, phone, db):
+    """ change a person in the phonebook """
+    database = load(db)
+    if name in database:
+        del database[name]
+        pickle.dump(database, open(db, 'wb'))
+        print("%s removed from %r" % (name, db))
+    else:
+        print("no such person %r in %r" % (name, db))
+        sys.exit(-1)
+
+@cli.command('reverse-lookup')
+@click.argument('phone')
+@click.argument('db')
+def reverse(phone, db):
+    """ lookup a name by phone number """
+    database = load(db)
+    database = dict(zip(database.values(), database.keys()))
+
+    if phone in database:
+        print("%s (%s)" % (database[phone], phone))
+    else:
+        print("no one found with number %r" % phone)
+        sys.exit(-1)
 
 if __name__ == '__main__':
     cli()
