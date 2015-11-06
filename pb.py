@@ -33,7 +33,7 @@ def lookup(name, db):
 @cli.command()
 @click.argument('db')
 def create(db):
-    """ lookup all phone numbers that match name """
+    """ create a new database """
     if exists(db):
         print("phonebook %r already exists" % db)
         sys.exit(-1)
@@ -77,7 +77,7 @@ def change(name, phone, db):
 @click.argument('phone')
 @click.argument('db')
 def remove(name, phone, db):
-    """ change a person in the phonebook """
+    """ remove a person from the phonebook """
     database = load(db)
     if name in database:
         del database[name]
