@@ -74,9 +74,8 @@ def change(name, phone, db):
 
 @cli.command()
 @click.argument('name')
-@click.argument('phone')
 @click.argument('db')
-def remove(name, phone, db):
+def remove(name, db):
     """ remove a person from the phonebook """
     database = load(db)
     if name in database:

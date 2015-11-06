@@ -23,12 +23,16 @@ assert './pb.py add "Sarah Ahmed" "123 456 7890" hsphonebook.pb' "'Sarah Ahmed' 
 
 assert './pb.py change "Haras Ahmed" "123 432 1234" hsphonebook.pb' "no such person 'Haras Ahmed' in 'hsphonebook.pb'"
 
-assert './pb.py remove "Haras Ahmed" "123 432 1234" hsphonebook.pb' "no such person 'Haras Ahmed' in 'hsphonebook.pb'"
+assert './pb.py remove "Haras Ahmed" hsphonebook.pb' "no such person 'Haras Ahmed' in 'hsphonebook.pb'"
 
 assert './pb.py change "Sarah Ahmed" "123 432 1234" hsphonebook.pb' "Sarah Ahmed number changed to '123 432 1234'"
 
 assert './pb.py reverse-lookup "312 432 5432" hsphonebook.pb' "no one found with number '312 432 5432'"
 
 assert './pb.py reverse-lookup "123 432 1234" hsphonebook.pb' "Sarah Ahmed (123 432 1234)"
+
+assert './pb.py remove "Sarah Ahmed" hsphonebook.pb' "Sarah Ahmed removed from 'hsphonebook.pb'"
+
+assert './pb.py lookup Sarah hsphonebook.pb' "Sarah Apple (509 123 4567)"
 
 assert_end
