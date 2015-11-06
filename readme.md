@@ -2,6 +2,13 @@
 
 **pb** is a command line tool that manages phone books, via the interface below.
 
+# installation
+
+    pip3 install click
+    alias pb='python pb.py'
+
+# sample interaction
+
     $ pb lookup Sarah hsphonebook.pb 
     no such phonebook
 
