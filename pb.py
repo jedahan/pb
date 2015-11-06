@@ -2,14 +2,14 @@
 
 import sys
 import click
+from os.path import exists
 
 def load(ctx, param, db):
-    try:
-        data = open(db)
-    except FileNotFoundError:
+    if exists(db):
+        return open(db)
+    else:
         print("no such phonebook %r" % db)
         sys.exit(-1)
-    return data
 
 @click.group()
 def cli():
@@ -22,6 +22,18 @@ def cli():
 def lookup(name):
     """ lookup all phone numbers that match name """
     print(name)
+
+
+@cli.command()
+@click.argument('db')
+def create(db):
+    """ lookup all phone numbers that match name """
+    if exists(db):
+        print("phonebook %r already exists" % db)
+        sys.exit(-1)
+    else:
+        open(db, 'w')
+        print("created phonebook %r in the current directory" % db)
 
 if __name__ == '__main__':
     cli()

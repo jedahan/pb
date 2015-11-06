@@ -2,9 +2,13 @@
 
 source assert.sh
 
+rm hsphonebook.pb > /dev/null &2>1
+
 assert "./pb.py lookup Sarah hsphonebook.pb" "no such phonebook 'hsphonebook.pb'"
 
-assert './pb.py create hsphonebook.pb' 'created phonebook hsphonebook../pb.py in the current directory'
+assert './pb.py create hsphonebook.pb' "created phonebook 'hsphonebook.pb' in the current directory"
+
+assert './pb.py create hsphonebook.pb' "phonebook 'hsphonebook.pb' already exists"
 
 assert './pb.py lookup Sarah hsphonebook.pb' '0 results found'
 
