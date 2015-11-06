@@ -2,11 +2,12 @@
 
 import sys
 import click
+import pickle
 from os.path import exists
 
 def load(ctx, param, db):
     if exists(db):
-        return open(db)
+        return pickle.load(open(db, 'rb'))
     else:
         print("no such phonebook %r" % db)
         sys.exit(-1)
@@ -19,10 +20,12 @@ def cli():
 @cli.command()
 @click.argument('name')
 @click.argument('db', callback=load)
-def lookup(name):
+def lookup(name, db):
     """ lookup all phone numbers that match name """
-    print(name)
-
+    if len(db):
+        print(db)
+    else:
+        print("0 results found")
 
 @cli.command()
 @click.argument('db')
@@ -32,7 +35,8 @@ def create(db):
         print("phonebook %r already exists" % db)
         sys.exit(-1)
     else:
-        open(db, 'w')
+        database = {}
+        pickle.dump(database, open(db, 'wb'))
         print("created phonebook %r in the current directory" % db)
 
 if __name__ == '__main__':
