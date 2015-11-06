@@ -1,7 +1,8 @@
-#!env bash
+#!/usr/bin/env bash
+
 source assert.sh
 
-assert 'pb lookup Sarah hsphonebook.pb' 'no such phonebook'
+assert "./pb.py lookup Sarah hsphonebook.pb" "no such phonebook 'hsphonebook.pb'"
 
 assert 'pb create hsphonebook.pb' 'created phonebook hsphonebook.pb in the current directory'
 
