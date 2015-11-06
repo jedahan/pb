@@ -7,6 +7,10 @@
     pip3 install click
     alias pb='python pb.py'
 
+# tests
+
+    ./tests.sh
+
 # sample interaction
 
     $ pb lookup Sarah hsphonebook.pb 
