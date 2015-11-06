@@ -12,13 +12,14 @@ assert './pb.py create hsphonebook.pb' "phonebook 'hsphonebook.pb' already exist
 
 assert './pb.py lookup Sarah hsphonebook.pb' '0 results found'
 
-assert './pb.py add "Sarah Ahmed" "432 123 4321"' 'added "Sarah Ahmed (432 123 4321)"'
+assert './pb.py add "Sarah Ahmed" "432 123 4321" hsphonebook.pb' "added 'Sarah Ahmed (432 123 4321)' to 'hsphonebook.pb'"
 
-assert './pb.py add "Sarah Apple" "509 123 4567"' 'added "Sarah Apple (509 123 4567)"'
+assert './pb.py add "Sarah Apple" "509 123 4567" hsphonebook.pb' "added 'Sarah Apple (509 123 4567)' to 'hsphonebook.pb'"
 
-assert './pb.py lookup Sarah hsphonebook.pb' 'Sarah Ahmed 432 123 4321\nSarah Orange 123 456 7890'
+assert './pb.py lookup Sarah hsphonebook.pb' 'Sarah Ahmed (432 123 4321)
+Sarah Apple (509 123 4567)'
 
-assert './pb.py add "Sarah Ahmed" "123 456 7890" hsphonebook.pb' '"Sarah Ahmed" already in hsphonebook.pb'
+assert './pb.py add "Sarah Ahmed" "123 456 7890" hsphonebook.pb' "'Sarah Ahmed' already in 'hsphonebook.pb'"
 
 assert './pb.py change "Haras Ahmed" "123 432 1234" hsphonebook.pb' 'no such person "Haras Ahmed" in hsphonebook.pb'
 
