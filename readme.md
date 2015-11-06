@@ -2,16 +2,42 @@
 
 **pb** is a command line tool that manages phone books, via the interface below.
 
-# installation
+## Installation
+
+Recommended is to use virtualenv and setuptools:
+
+    virtualenv venv
+    . venv/bin/activate
+    pip install .
+
+Simplest way is:
 
     pip3 install click
     alias pb='python pb.py'
 
-# tests
+## Tests
 
     ./tests.sh
 
-# sample interaction
+## Help
+
+    $ pb --help
+    Usage: pb.py [OPTIONS] COMMAND [ARGS]...
+
+      pb: a phone book manager
+
+    Options:
+      --help  Show this message and exit.
+
+    Commands:
+      add             add a new person to the phonebook
+      change          change a person in the phonebook
+      create          lookup all phone numbers that match name
+      lookup          lookup all phone numbers that match name
+      remove          change a person in the phonebook
+      reverse-lookup  lookup a name by phone number
+
+## Sample session
 
     $ pb lookup Sarah hsphonebook.pb 
     no such phonebook
