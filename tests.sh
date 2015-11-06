@@ -2,7 +2,7 @@
 
 source assert.sh
 
-rm hsphonebook.pb > /dev/null &2>1
+rm hsphonebook.pb > /dev/null 2>&1
 
 assert "./pb.py lookup Sarah hsphonebook.pb" "no such phonebook 'hsphonebook.pb'"
 
